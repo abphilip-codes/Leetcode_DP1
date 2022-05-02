@@ -2,10 +2,7 @@
 # https://leetcode.com/problems/house-robber/
 
 class Solution:
-    def climbStairs(self, n: int) -> int:
-        l, r = 0, 1
-        for z in range(n+1):
-            k = l
-            l = l + r
-            r = k
-        return l
+    def rob(self, nums: List[int]) -> int:
+        a, s = 0, 0
+        for z in nums: a, s = z+s, max(a, s)
+        return max(a, s)
