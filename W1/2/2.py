@@ -1,11 +1,11 @@
-# 1137
-# https://leetcode.com/problems/n-th-tribonacci-number/
+# 746
+# https://leetcode.com/problems/min-cost-climbing-stairs/
 
 class Solution:
-    def tribonacci(self, n: int) -> int:
-        if(n==0): return 0
-        if(n==1 or n==2): return 1
-        a, b, c = 0, 1, 1
-        for z in range(3, n+1):
-            a, b, c = b, c, a+b+c
-        return c
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        l = cost[-2]
+        r = cost[-1]
+        for z in range(len(cost)-3, -1, -1):
+            k = cost[z] + min(l, r)
+            l, r = k, l
+        return min(l, r)
