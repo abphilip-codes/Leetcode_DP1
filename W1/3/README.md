@@ -1,1 +1,1 @@
-# Dynamic Programming I: Day 3
+# Dynamic Programming I: Day 3 
