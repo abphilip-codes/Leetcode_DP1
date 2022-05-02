@@ -1,1 +1,1 @@
-# Dynamic Programming I: Day 1 
+# Dynamic Programming I: Day 1
