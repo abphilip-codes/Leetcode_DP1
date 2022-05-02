@@ -2,10 +2,10 @@
 # https://leetcode.com/problems/delete-and-earn/
 
 class Solution:
-    def minCostClimbingStairs(self, cost: List[int]) -> int:
-        l = cost[-2]
-        r = cost[-1]
-        for z in range(len(cost)-3, -1, -1):
-            k = cost[z] + min(l, r)
-            l, r = k, l
-        return min(l, r)
+    def deleteAndEarn(self, nums: List[int]) -> int:
+        c = collections.Counter(nums)
+        l, r = 0, 0
+        for z in range(max(c)+1):
+            k = max(l + (c[z]*z), r)
+            l, r = r, k
+        return max(l, r)
