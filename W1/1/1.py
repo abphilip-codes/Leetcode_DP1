@@ -6,6 +6,6 @@ class Solution:
         if(n==0): return 0
         if(n==1): return 1
         a, b = 1, 1
-        for i in range(1, n):
+        for z in range(1, n):
             b, a = a + b, b
         return a
