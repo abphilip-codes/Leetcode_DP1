@@ -3,8 +3,9 @@
 
 class Solution:
     def maxScoreSightseeingPair(self, values: List[int]) -> int:
-        m, ans = values[-1]-len(values), 0
-        for z in range(len(values)-2, -1, -1):
-            m = max(m, values[z+1]-z-1)
-            ans = max(ans, values[z]+z+m)
-        return ans
+        dp = [values[0] + values[1]-1, max(values[1], values[0]-1)]
+        for z in range(2, len(values)):
+            dp[1] = dp[1] - 1
+            dp[0] = max(dp[0], values[z] + dp[1])
+            dp[1] = max(dp[1], values[z])
+        return dp[0]
