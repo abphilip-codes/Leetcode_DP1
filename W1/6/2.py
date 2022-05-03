@@ -12,4 +12,4 @@ class Solution:
                 else:
                     if b is None: b = z
                     ans = max(ans, z-b)
-        return ans
+        return ans 
