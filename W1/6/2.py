@@ -3,13 +3,13 @@
 
 class Solution:
     def getMaxLen(self, nums: List[int]) -> int:
-        ans = 0
-        for arr in [nums, nums[::-1]]:
-            a, b, k = 0, 0, 0
-            for z in arr:            
-                if(z==0): a, b = 0, 0
-                elif(z<0): a+=1
-                elif(z>0): b+=1
-                k = max((a+b) if(a%2==0) else 0, k)
-            ans = max(k, ans)
+        ans, a, b, k = 0, -1, None, 1 
+        for z in range(len(nums)):
+            if not nums[z]: a, b, k = z, None, 1
+            else:
+                k *= nums[z]/abs(nums[z])
+                if(k>0): ans = max(ans, z-a)
+                elif(k<0):
+                    if not b: b = z
+                    ans = max(ans, z-b)
         return ans
