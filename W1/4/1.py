@@ -2,7 +2,10 @@
 # https://leetcode.com/problems/jump-game/
 
 class Solution:
-    def rob(self, nums: List[int]) -> int:
-        a, s = 0, 0
-        for z in nums: a, s = z+s, max(a, s)
-        return max(a, s)
+    def canJump(self, nums: List[int]) -> bool:
+        n = len(nums)
+        a, b = n-2, n-1
+        while(a>=0):
+            if(nums[a]+a>=b): b = a
+            a-=1
+        return (b==0)
