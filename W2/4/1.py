@@ -2,14 +2,13 @@
 # https://leetcode.com/problems/ugly-number-ii/
 
 class Solution:
-    def numberOfArithmeticSlices(self, nums: List[int]) -> int:
-        l = len(nums)
-        if(l<3): return 0
-        ans, k, n = 0, 1, nums[0]-nums[1]
-        for z in range(2, l):
-            p = nums[z-1]-nums[z]
-            if(n==p): k+=1
-            else:
-                n = p
-                if(k>1): ans, k = ans+((k+1)*(k-2)//2+1), 1    
-        return ans+((k+1)*(k-2)//2+1)
+    def nthUglyNumber(self, n: int) -> int:
+        if(n<=6): return n
+        a1, a2, a3 = 0, 0, 0 
+        a = [1] + [0]*(n-1)
+        for z in range(1, n):
+            a[z] = min(a[a1]*2, a[a2]*3, a[a3]*5)
+            if(a[z]==a[a1]*2): a1+=1
+            if(a[z]==a[a2]*3): a2+=1
+            if(a[z]==a[a3]*5): a3+=1
+        return a[-1]
