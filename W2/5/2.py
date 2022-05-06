@@ -1,10 +1,11 @@
-# 96
-# https://leetcode.com/problems/unique-binary-search-trees/
+# 119
+# https://leetcode.com/problems/pascals-triangle-ii/
 
 class Solution:
-    def numTrees(self, n: int) -> int:        
-        d = {}
-        for z in range(n+1):
-            if(z<=1): d[z] = 1
-            else: d[z] = sum(d[y]*d[z-y-1] for y in range(z))
-        return d[n]
+    def getRow(self, rowIndex: int) -> List[int]:
+        ans = []
+        for z in range(rowIndex+1):
+            k = (math.factorial(rowIndex) // 
+                (math.factorial(z) * math.factorial(rowIndex-z)))
+            ans.append(k)
+        return ans
