@@ -2,11 +2,11 @@
 # https://leetcode.com/problems/minimum-falling-path-sum/
 
 class Solution:
-    def generate(self, numRows: int) -> List[List[int]]:
-        a = [1]*numRows
-        for z in range(numRows): 
-            a[z] = [1]*(z+1)
-        for z in range(2, len(a)):
-            for y in range(1, len(a[z])-1):
-                a[z][y] = a[z-1][y-1]+a[z-1][y]
-        return a
+    def minFallingPathSum(self, matrix: List[List[int]]) -> int:
+        n, m = len(matrix), 10001
+        for z in range(n-2, -1, -1):
+            for y in range(n):
+                a1 = matrix[z+1][y-1] if(y>0) else m 
+                a2 = matrix[z+1][y+1] if(y<n-1) else m
+                matrix[z][y] = matrix[z][y] + min(a1, matrix[z+1][y], a2)
+        return min(matrix[0])
