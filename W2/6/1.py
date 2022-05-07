@@ -8,5 +8,5 @@ class Solution:
             for y in range(n):
                 a1 = matrix[z+1][y-1] if(y>0) else m 
                 a2 = matrix[z+1][y+1] if(y<n-1) else m
-                matrix[z][y] = matrix[z][y] + min(a1, matrix[z+1][y], a2)
+                matrix[z][y] += min(a1, matrix[z+1][y], a2)
         return min(matrix[0])
