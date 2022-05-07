@@ -2,10 +2,8 @@
 # https://leetcode.com/problems/triangle/
 
 class Solution:
-    def getRow(self, rowIndex: int) -> List[int]:
-        ans = []
-        for z in range(rowIndex+1):
-            k = (math.factorial(rowIndex) // 
-                (math.factorial(z) * math.factorial(rowIndex-z)))
-            ans.append(k)
-        return ans
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        for z in range(len(triangle)-2, -1, -1):
+            for y in range(len(triangle[z])):
+                triangle[z][y] += min(triangle[z+1][y], triangle[z+1][y+1])
+        return triangle[0][0]
