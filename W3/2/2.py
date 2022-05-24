@@ -2,13 +2,13 @@
 # https://leetcode.com/problems/maximal-square/
 
 class Solution:
-    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
-        m = len(obstacleGrid)
-        n = len(obstacleGrid[0])
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        a, b, k = len(matrix), len(matrix[0]), 0
+        arr = [[0 for _ in range(b+1)] for _ in range(a+1)]
 
-        @lru_cache(None)
-        def f(a=0, b=0):
-            if(a>=m or b>=n or obstacleGrid[a][b]==1): return 0
-            if(a==m-1 and b== n-1): return 1
-            return f(a+1, b) + f(a, b+1)
-        return f()
+        for z in range(1, a+1):
+            for y in range(1, b+1):
+                if(matrix[z-1][y-1]=="1"):
+                    arr[z][y] = 1 + min(arr[z-1][y], arr[z][y-1], arr[z-1][y-1])
+                    k = max(k, arr[z][y])
+        return k*k
