@@ -2,13 +2,17 @@
 # https://leetcode.com/problems/longest-palindromic-subsequence/
 
 class Solution:
-    def maximalSquare(self, matrix: List[List[str]]) -> int:
-        a, b, k = len(matrix), len(matrix[0]), 0
-        arr = [[0 for _ in range(b+1)] for _ in range(a+1)]
+    def longestPalindromeSubseq(self, s: str) -> int:
+        if(s==s[::-1]): return len(s)
+        n = len(s)
+        arr = [0 for y in range(n)]
+        arr[n-1] = 1
 
-        for z in range(1, a+1):
-            for y in range(1, b+1):
-                if(matrix[z-1][y-1]=="1"):
-                    arr[z][y] = 1 + min(arr[z-1][y], arr[z][y-1], arr[z-1][y-1])
-                    k = max(k, arr[z][y])
-        return k*k
+        for z in range(n-1, -1, -1):
+            t = arr[:]
+            t[z] = 1
+            for y in range(z+1, n):
+                if(s[z]==s[y]): t[y] = 2 + arr[y-1]
+                else: t[y] = max(arr[y], t[y-1])
+            arr = t
+        return arr[n-1]
