@@ -2,14 +2,15 @@
 # https://leetcode.com/problems/longest-palindromic-substring
 
 class Solution:
-    def minPathSum(self, grid: List[List[int]]) -> int:
-        a, b = len(grid), len(grid[0])
-        arr = [[0]*(b) for z in range(a)]
-        
-        for z in range(a):
-            for y in range(b):
-                k = min(arr[z-1][y] if(z>0) else float('inf'), \
-                        arr[z][y-1] if(y>0) else float('inf'))
-                
-                arr[z][y] = grid[z][y] + (k if k!=float('inf') else 0)
-        return arr[-1][-1]
+    def longestPalindrome(self, s: str) -> str:
+        l = len(s)
+        if(l<=1): return s
+        a, b, z = 0, 1, 0
+        while(z<l):
+            if(l-z<=b/2): break
+            y, k = z, z
+            while(k<l-1 and s[k]==s[k+1]): k += 1
+            z = k + 1
+            while(k<l-1 and y and s[k+1]==s[y-1]):  k, y = k + 1, y - 1
+            if(k-y+1>b): a, b = y, k - y + 1
+        return s[a:a+b]
