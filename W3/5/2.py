@@ -2,15 +2,14 @@
 # https://leetcode.com/problems/longest-common-subsequence/
 
 class Solution:
-    def wiggleMaxLength(self, nums: List[int]) -> int:
-        if not nums: return 0
-        ans, k = 1, None
-        for z in range(len(nums)-1):
-            if(nums[z+1]-nums[z]==0): continue
-            if(nums[z+1]-nums[z]>0):
-                if(k==None or k==False): ans+=1
-                k = True
-            if(nums[z+1]-nums[z]<0):
-                if(k==None or k==True): ans+=1
-                k = False
-        return ans
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        t1, k, ans = defaultdict(deque), [], []
+        for y, z in enumerate(text1):
+            if(z in set(text2)): t1[z].appendleft(y)
+        for z in text2:
+            if(z in set(text1)): k += list(t1[z])
+        for z in k:
+            y = bisect_left(ans, z)
+            if(y==len(ans)): ans.append(z)
+            else: ans[y] = z
+        return len(ans)
