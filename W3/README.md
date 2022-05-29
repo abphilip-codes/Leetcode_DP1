@@ -1,1 +1,1 @@
-# Dynamic Programming I: Week 3
+# Dynamic Programming I: Week 3 
